@@ -16,7 +16,7 @@ export const Nav = styled.nav`
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0, 0, 0, 0.05);
 
   @media (max-width: 768px) {
-    grid-template-columns: 1fr;
+    /* grid-template-columns: 1fr; */
   }
 `;
 
