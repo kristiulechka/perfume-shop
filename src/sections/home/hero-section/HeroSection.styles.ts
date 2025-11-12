@@ -18,6 +18,7 @@ export const VideoBackground = styled.video`
   transform: translate(-50%, -50%);
   object-fit: cover;
   z-index: 1;
+  filter: blur(10px);
 `;
 
 export const VideoOverlay = styled.div`
@@ -26,9 +27,7 @@ export const VideoOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  filter: blur(10px);
 `;
-
 
 export const HeroContent = styled.div`
   position: relative;
@@ -73,5 +72,55 @@ export const HeroSubtitle = styled.p`
   
   @media (max-width: 480px) {
     font-size: clamp(48px, 12vw, 80px);
+  }
+`;
+
+export const HeroBottom = styled.div`
+  position: absolute;
+  bottom: -105px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  z-index: 3;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 40px;
+`;
+
+export const BottomLeft = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const BottomRight = styled.div`
+  position: absolute;
+  bottom: 180px;
+  left: 75%;
+  transform: translateX(-50%);
+  z-index: 3;
+`;
+
+
+export const ProductImage = styled.img`
+  max-height: 536px;
+  max-width: 100%;
+  object-fit: contain;
+`;
+
+export const ShopButton = styled.a<{ buttonBg: string }>`
+  display: inline-block;
+  padding: 16px 48px;
+  border-radius: 40px;
+  background: ${props => props.buttonBg};
+  color: white;
+  text-decoration: none;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  transition: opacity 0.3s ease;
+  
+  &:hover {
+    opacity: 0.8;
   }
 `;
