@@ -7,6 +7,18 @@ export const HeroContainer = styled.section`
   overflow: hidden;
 `;
 
+export const VideoBackgroundContainer = styled.div`
+  filter: blur(10px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: cover;
+`;
+
 export const VideoBackground = styled.video`
   position: absolute;
   top: 50%;
@@ -17,16 +29,6 @@ export const VideoBackground = styled.video`
   height: auto;
   transform: translate(-50%, -50%);
   object-fit: cover;
-  z-index: 1;
-  filter: blur(10px);
-`;
-
-export const VideoOverlay = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
 `;
 
 export const HeroContent = styled.div`

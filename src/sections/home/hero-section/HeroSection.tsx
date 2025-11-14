@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import {
   HeroContainer,
   VideoBackground,
-  VideoOverlay,
   HeroContent,
   HeroTitle,
   HeroSubtitle,
@@ -11,6 +10,7 @@ import {
   BottomRight,
   ProductImage,
   ShopButton,
+  VideoBackgroundContainer,
 } from './HeroSection.styles';
 
 const slides = [
@@ -55,11 +55,12 @@ export const HeroSection = () => {
 
   return (
     <HeroContainer>
-      <VideoBackground key={currentIndex} autoPlay loop muted playsInline preload="auto">
-        <source src={currentSlide.webm} type="video/webm" />
-        <source src={currentSlide.mp4} type="video/mp4" />
-      </VideoBackground>
-      <VideoOverlay />
+      <VideoBackgroundContainer>
+        <VideoBackground key={currentIndex} autoPlay loop muted playsInline preload="auto">
+          <source src={currentSlide.webm} type="video/webm" />
+          <source src={currentSlide.mp4} type="video/mp4" />
+        </VideoBackground>
+      </VideoBackgroundContainer>
       <HeroContent>
         <HeroTitle>Three stories, three fragrances...</HeroTitle>
         <HeroSubtitle>{currentSlide.title}</HeroSubtitle>
