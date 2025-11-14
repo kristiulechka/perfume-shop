@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 export const SectionContainer = styled.section`
   min-height: 80vh;
   padding: 80px 40px;
-  background-color: #000;
+  background-color: transparent;
 
   @media (max-width: 768px) {
     padding: 60px 20px;

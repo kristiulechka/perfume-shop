@@ -7,6 +7,12 @@ export const SectionContainer = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
 
   @media (max-width: 768px) {
     padding: 60px 20px;
