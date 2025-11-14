@@ -1,10 +1,21 @@
 import styled from '@emotion/styled';
+import { keyframes } from '@emotion/react';
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
 
 export const HeroContainer = styled.section`
   position: relative;
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  background-color: black;
 `;
 
 export const VideoBackgroundContainer = styled.div`
@@ -29,6 +40,7 @@ export const VideoBackground = styled.video`
   height: auto;
   transform: translate(-50%, -50%);
   object-fit: cover;
+  animation: ${fadeIn} 0.4s ease-in-out;
 `;
 
 export const HeroContent = styled.div`
@@ -67,6 +79,7 @@ export const HeroSubtitle = styled.p`
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: ${fadeIn} 0.3s ease-in-out;
   
   @media (max-width: 768px) {
     font-size: clamp(60px, 15vw, 120px);
@@ -103,11 +116,11 @@ export const BottomRight = styled.div`
   z-index: 3;
 `;
 
-
 export const ProductImage = styled.img`
   max-height: 536px;
   max-width: 100%;
   object-fit: contain;
+  animation: ${fadeIn} 0.3s ease-in-out;
 `;
 
 export const ShopButton = styled.a<{ buttonBg: string }>`

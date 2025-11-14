@@ -42,16 +42,20 @@ const slides = [
 
 export const HeroSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [nextIndex, setNextIndex] = useState(1);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % slides.length);
+      const next = (currentIndex + 1) % slides.length;
+      setNextIndex(next);
+      setCurrentIndex(next);
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [currentIndex]);
 
   const currentSlide = slides[currentIndex];
+  const nextSlide = slides[nextIndex];
 
   return (
     <HeroContainer>
@@ -61,13 +65,19 @@ export const HeroSection = () => {
           <source src={currentSlide.mp4} type="video/mp4" />
         </VideoBackground>
       </VideoBackgroundContainer>
+      <VideoBackgroundContainer style={{ opacity: 0 }}>
+        <VideoBackground key={nextIndex} autoPlay loop muted playsInline preload="auto">
+          <source src={nextSlide.webm} type="video/webm" />
+          <source src={nextSlide.mp4} type="video/mp4" />
+        </VideoBackground>
+      </VideoBackgroundContainer>
       <HeroContent>
         <HeroTitle>Three stories, three fragrances...</HeroTitle>
-        <HeroSubtitle>{currentSlide.title}</HeroSubtitle>
+        <HeroSubtitle key={currentIndex}>{currentSlide.title}</HeroSubtitle>
       </HeroContent>
       <HeroBottom>
         <BottomLeft>
-          <ProductImage src={currentSlide.image} alt={currentSlide.title} />
+          <ProductImage key={currentIndex} src={currentSlide.image} alt={currentSlide.title} />
         </BottomLeft>
         <BottomRight>
           <ShopButton href={currentSlide.link} buttonBg={currentSlide.buttonBg}>
