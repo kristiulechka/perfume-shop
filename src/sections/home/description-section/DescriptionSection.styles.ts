@@ -13,7 +13,7 @@ export const SectionContainer = styled.section`
   z-index: -1;
   top: 0;
   left: 0;
-  background-color: #032819;
+  /* background-color: #032819; */
 
   @media (max-width: 768px) {
     padding: 60px 20px;

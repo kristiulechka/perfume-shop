@@ -1,5 +1,5 @@
 import { ItemCard } from '../../../components/item-card/ItemCard';
-import { SectionContainer, ItemsContainer } from './AllItemsSection.styles';
+import { SectionContainer } from './AllItemsSection.styles';
 
 const items = [
   {
@@ -30,12 +30,12 @@ const items = [
 
 export const AllItemsSection = () => {
   return (
-    <SectionContainer>
-      <ItemsContainer>
-        {items.map((item, index) => (
-          <ItemCard key={index} {...item} />
-        ))}
-      </ItemsContainer>
-    </SectionContainer>
+    <>
+      {items.map((item, index) => (
+        <SectionContainer key={index}>
+          <ItemCard {...item} />
+        </SectionContainer>
+      ))}
+    </>
   );
 };
