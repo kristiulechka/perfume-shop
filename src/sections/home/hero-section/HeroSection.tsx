@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   HeroContainer,
   VideoBackground,
@@ -43,6 +43,26 @@ const slides = [
 export const HeroSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [nextIndex, setNextIndex] = useState(1);
+  const [scrollOpacity, setScrollOpacity] = useState(1);
+  const heroRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!heroRef.current) return;
+      
+      const heroTop = heroRef.current.offsetTop;
+      const heroHeight = heroRef.current.offsetHeight;
+      const scrollPosition = window.scrollY;
+      
+      const scrollPastHero = scrollPosition - heroTop;
+      const opacity = Math.max(0, 1 - scrollPastHero / heroHeight);
+      
+      setScrollOpacity(opacity);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -58,7 +78,7 @@ export const HeroSection = () => {
   const nextSlide = slides[nextIndex];
 
   return (
-    <HeroContainer>
+    <HeroContainer ref={heroRef} style={{ opacity: scrollOpacity }}>
       <VideoBackgroundContainer>
         <VideoBackground key={currentIndex} autoPlay loop muted playsInline preload="auto">
           <source src={currentSlide.webm} type="video/webm" />
