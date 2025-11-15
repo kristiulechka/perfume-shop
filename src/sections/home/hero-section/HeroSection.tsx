@@ -55,9 +55,15 @@ export const HeroSection = () => {
       const scrollPosition = window.scrollY;
       
       const scrollPastHero = scrollPosition - heroTop;
-      const opacity = Math.max(0, 1 - scrollPastHero / heroHeight);
+      const seventyPercentHeight = heroHeight * 0.5;
       
-      setScrollOpacity(opacity);
+      if (scrollPastHero >= seventyPercentHeight) {
+        setScrollOpacity(0);
+      } else {
+        const fadeProgress = scrollPastHero / seventyPercentHeight;
+        const opacity = 1 - fadeProgress;
+        setScrollOpacity(Math.max(0, opacity));
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
