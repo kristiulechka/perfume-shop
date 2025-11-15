@@ -3,33 +3,32 @@ import styled from '@emotion/styled';
 export const CardContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 20px;
-  max-width: 1200px;
+  gap: 0;
+  max-width: 75vw;
   margin: 0 auto;
   padding: 40px 0;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     gap: 20px;
+    max-width: 90vw;
   }
 `;
 
 export const CardImage = styled.img`
-  grid-column: span 4;
+  grid-column: 1 / span 4;
   width: 100%;
-  max-width: 374px;
   height: auto;
   aspect-ratio: 1;
   object-fit: cover;
 
   @media (max-width: 768px) {
     grid-column: span 1;
-    max-width: 100%;
   }
 `;
 
 export const CardContent = styled.div`
-  grid-column: span 4;
+  grid-column: 6 / span 7;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -46,17 +45,14 @@ export const CardTitle = styled.h3`
   font-weight: 400;
   line-height: 80%;
   letter-spacing: -1.24px;
+  margin-bottom: 32px;
 
   @media (max-width: 768px) {
     font-size: 48px;
   }
 `;
 
-export const NotesSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
+export const NotesSection = styled.div``;
 
 export const NotesLabel = styled.span`
   color: #fffefe;
@@ -65,6 +61,7 @@ export const NotesLabel = styled.span`
   font-weight: 400;
   line-height: 80%;
   letter-spacing: -0.44px;
+  margin-right: 8px;
 `;
 
 export const NotesText = styled.span`
@@ -81,13 +78,14 @@ export const CursiveText = styled.p`
   font-size: 18px;
   font-style: italic;
   font-weight: 300;
-  line-height: 80%;
+  line-height: 120%;
   letter-spacing: -0.36px;
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.60) -0.55%, rgba(255, 255, 255, 0.30) 26.78%, rgba(255, 255, 255, 0.60) 51.66%, rgba(255, 255, 255, 0.24) 78.8%, rgba(255, 255, 255, 0.60) 103.04%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-top: 8px;
+  margin-top: 16px;
+  padding-bottom: 4px;
 `;
 
 export const AddToCartButton = styled.button`

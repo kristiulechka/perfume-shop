@@ -10,19 +10,6 @@ export const SectionContainer = styled.section`
   }
 `;
 
-export const Title = styled.h2`
-  font-size: 48px;
-  font-weight: 300;
-  text-align: center;
-  margin-bottom: 60px;
-  color: #fff;
-
-  @media (max-width: 768px) {
-    font-size: 36px;
-    margin-bottom: 40px;
-  }
-`;
-
 export const ItemsContainer = styled.div`
   display: flex;
   flex-direction: column;
