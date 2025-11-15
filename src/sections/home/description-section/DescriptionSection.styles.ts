@@ -1,19 +1,19 @@
 import styled from '@emotion/styled';
 
 export const SectionContainer = styled.section`
-  min-height: 60vh;
+  min-height: 100vh;
   padding: 80px 40px;
-  background-color: #111;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   position: fixed;
   z-index: -1;
   top: 0;
   left: 0;
-  /* background-color: #032819; */
+  overflow: hidden;
+  background-color: #032819;
 
   @media (max-width: 768px) {
     padding: 60px 20px;
