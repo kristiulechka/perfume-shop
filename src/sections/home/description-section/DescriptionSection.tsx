@@ -3,39 +3,50 @@ import { SectionContainer } from './DescriptionSection.styles';
 
 export const DescriptionSection = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [frameCount, setFrameCount] = useState(0);
-  const imagesRef = useRef<HTMLImageElement[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const imagesRef = useRef<(HTMLImageElement | null)[]>([]);
+  const loadedRef = useRef<boolean[]>([]);
+  const frameCount = 125;
 
   useEffect(() => {
+    imagesRef.current = new Array(frameCount).fill(null);
+    loadedRef.current = new Array(frameCount).fill(false);
+
+    const loadImage = (index: number): Promise<void> => {
+      return new Promise((resolve) => {
+        const img = new Image();
+        const frameNumber = (index + 1).toString().padStart(4, '0');
+        img.onload = () => {
+          imagesRef.current[index] = img;
+          loadedRef.current[index] = true;
+          resolve();
+        };
+        img.onerror = () => resolve();
+        img.src = `/frames/frame_${frameNumber}.jpg`;
+      });
+    };
+
     const loadFrames = async () => {
-      const frames: HTMLImageElement[] = [];
-      let i = 1;
+      await loadImage(0);
       
-      while (true) {
-        try {
-          const img = new Image();
-          const frameNumber = i.toString().padStart(4, '0');
-          await new Promise((resolve, reject) => {
-            img.onload = resolve;
-            img.onerror = reject;
-            img.src = `/frames/frame_${frameNumber}.jpg`;
-          });
-          frames.push(img);
-          i++;
-        } catch {
-          break;
-        }
-      }
-      
-      imagesRef.current = frames;
-      setFrameCount(frames.length);
-      
-      if (frames.length > 0 && canvasRef.current) {
+      if (canvasRef.current && imagesRef.current[0]) {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d');
-        canvas.width = frames[0].width;
-        canvas.height = frames[0].height;
-        ctx?.drawImage(frames[0], 0, 0);
+        const firstImg = imagesRef.current[0];
+        canvas.width = firstImg.width;
+        canvas.height = firstImg.height;
+        ctx?.drawImage(firstImg, 0, 0);
+      }
+      
+      setIsLoading(false);
+
+      const batchSize = 10;
+      for (let i = 1; i < frameCount; i += batchSize) {
+        const batch = [];
+        for (let j = i; j < Math.min(i + batchSize, frameCount); j++) {
+          batch.push(loadImage(j));
+        }
+        await Promise.all(batch);
       }
     };
 
@@ -43,17 +54,33 @@ export const DescriptionSection = () => {
   }, []);
 
   useEffect(() => {
-    if (frameCount === 0) return;
+    if (isLoading) return;
+
+    const findNearestLoadedFrame = (targetIndex: number): number => {
+      if (loadedRef.current[targetIndex]) return targetIndex;
+      
+      for (let offset = 1; offset < frameCount; offset++) {
+        if (targetIndex - offset >= 0 && loadedRef.current[targetIndex - offset]) {
+          return targetIndex - offset;
+        }
+        if (targetIndex + offset < frameCount && loadedRef.current[targetIndex + offset]) {
+          return targetIndex + offset;
+        }
+      }
+      return 0;
+    };
 
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
       const scrollFraction = scrollPosition / maxScroll;
       
-      const frameIndex = Math.min(
+      const targetIndex = Math.min(
         Math.floor(scrollFraction * frameCount),
         frameCount - 1
       );
+
+      const frameIndex = findNearestLoadedFrame(targetIndex);
 
       const canvas = canvasRef.current;
       const ctx = canvas?.getContext('2d');
@@ -67,7 +94,7 @@ export const DescriptionSection = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [frameCount]);
+  }, [isLoading]);
 
   return (
     <SectionContainer>
@@ -80,6 +107,7 @@ export const DescriptionSection = () => {
           width: '100%',
           height: '100%',
           objectFit: 'cover',
+          zIndex: 1,
         }}
       />
     </SectionContainer>
