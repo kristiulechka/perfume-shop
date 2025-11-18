@@ -75,7 +75,7 @@ export const HeroSection = () => {
       const next = (currentIndex + 1) % slides.length;
       setNextIndex(next);
       setCurrentIndex(next);
-    }, 3000);
+    }, 6000);
 
     return () => clearInterval(interval);
   }, [currentIndex]);

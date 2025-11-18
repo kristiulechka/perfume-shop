@@ -28,6 +28,17 @@ export const VideoBackgroundContainer = styled.div`
   width: auto;
   height: auto;
   object-fit: cover;
+
+    &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 2;
+  }
 `;
 
 export const VideoBackground = styled.video`
@@ -40,7 +51,9 @@ export const VideoBackground = styled.video`
   height: auto;
   transform: translate(-50%, -50%);
   object-fit: cover;
-  animation: ${fadeIn} 0.4s ease-in-out;
+  animation: ${fadeIn} 0.3s ease-in-out;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), rgba(255, 255, 255, 0.00);
+  z-index: 1;
 `;
 
 export const HeroContent = styled.div`
