@@ -46,29 +46,28 @@ export const HeroSection = () => {
   const [scrollOpacity, setScrollOpacity] = useState(1);
   const heroRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!heroRef.current) return;
-      
-      const heroTop = heroRef.current.offsetTop;
-      const heroHeight = heroRef.current.offsetHeight;
-      const scrollPosition = window.scrollY;
-      
-      const scrollPastHero = scrollPosition - heroTop;
-      const seventyPercentHeight = heroHeight * 0.5;
-      
-      if (scrollPastHero >= seventyPercentHeight) {
-        setScrollOpacity(0);
-      } else {
-        const fadeProgress = scrollPastHero / seventyPercentHeight;
-        const opacity = 1 - fadeProgress;
-        setScrollOpacity(Math.max(0, opacity));
-      }
-    };
+useEffect(() => {
+  const handleScroll = () => {
+    const viewportHeight = window.innerHeight;
+    const scrollPosition = window.scrollY;
+    
+    const thirtyPercent = viewportHeight * 0.3;
+    const fullHeight = viewportHeight;
+    
+    if (scrollPosition <= thirtyPercent) {
+      setScrollOpacity(1);
+    } else if (scrollPosition >= fullHeight) {
+      setScrollOpacity(0);
+    } else {
+      const fadeProgress = (scrollPosition - thirtyPercent) / (fullHeight - thirtyPercent);
+      const opacity = 1 - fadeProgress;
+      setScrollOpacity(Math.max(0, opacity));
+    }
+  };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  window.addEventListener('scroll', handleScroll);
+  return () => window.removeEventListener('scroll', handleScroll);
+}, []);
 
   useEffect(() => {
     const interval = setInterval(() => {

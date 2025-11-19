@@ -11,11 +11,14 @@ const fadeIn = keyframes`
 `;
 
 export const HeroContainer = styled.section`
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100vh;
   overflow: hidden;
   background-color: black;
+  z-index: 1;
 `;
 
 export const VideoBackgroundContainer = styled.div`

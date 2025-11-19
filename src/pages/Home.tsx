@@ -7,7 +7,7 @@ export const Home = () => {
   return (
     <>
       <HeroSection />
-      {/* <div style={{ height: '70vh' }} /> */}
+      <div style={{ height: '150vh' }} />
       <DescriptionSection />
       <AllItemsSection />
       <PresentationSection />
