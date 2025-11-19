@@ -17,7 +17,7 @@ export const HeroContainer = styled.section`
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background-color: black;
+  background-color: transparent;
   z-index: 1;
 `;
 

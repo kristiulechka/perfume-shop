@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import {
   HeroContainer,
   VideoBackground,
@@ -43,33 +43,51 @@ const slides = [
 export const HeroSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [nextIndex, setNextIndex] = useState(1);
-  const [scrollOpacity, setScrollOpacity] = useState(1);
-  const heroRef = useRef<HTMLElement>(null);
-
-useEffect(() => {
-  const handleScroll = () => {
-    const viewportHeight = window.innerHeight;
-    const scrollPosition = window.scrollY;
-    
-    const thirtyPercent = viewportHeight * 0.3;
-    const fullHeight = viewportHeight;
-    
-    if (scrollPosition <= thirtyPercent) {
-      setScrollOpacity(1);
-    } else if (scrollPosition >= fullHeight) {
-      setScrollOpacity(0);
-    } else {
-      const fadeProgress = (scrollPosition - thirtyPercent) / (fullHeight - thirtyPercent);
-      const opacity = 1 - fadeProgress;
-      setScrollOpacity(Math.max(0, opacity));
-    }
-  };
-
-  window.addEventListener('scroll', handleScroll);
-  return () => window.removeEventListener('scroll', handleScroll);
-}, []);
+  const [contentOpacity, setContentOpacity] = useState(1);
+  const [bottleOpacity, setBottleOpacity] = useState(1);
+  const [bottleTransform, setBottleTransform] = useState({ y: 0, scale: 1 });
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    const handleScroll = () => {
+      const viewportHeight = window.innerHeight;
+      const scrollPosition = window.scrollY;
+      
+      const thirtyPercent = viewportHeight * 0.3;
+      const sixtyPercent = viewportHeight * 0.6;
+      const fullHeight = viewportHeight;
+      
+      if (scrollPosition <= thirtyPercent) {
+        setContentOpacity(1);
+        setBottleOpacity(1);
+        setBottleTransform({ y: 0, scale: 1 });
+        setIsPaused(false);
+      } else if (scrollPosition >= fullHeight) {
+        setContentOpacity(0);
+        setBottleOpacity(0);
+        setBottleTransform({ y: -100, scale: 1.2 });
+        setIsPaused(true);
+      } else {
+        const contentProgress = Math.min((scrollPosition - thirtyPercent) / (sixtyPercent - thirtyPercent), 1);
+        setContentOpacity(Math.max(0, 1 - contentProgress));
+        
+        const bottleProgress = (scrollPosition - thirtyPercent) / (fullHeight - thirtyPercent);
+        setBottleOpacity(Math.max(0, 1 - bottleProgress));
+        
+        const y = -100 * bottleProgress;
+        const scale = 1 + (0.2 * bottleProgress);
+        setBottleTransform({ y, scale });
+        setIsPaused(true);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    if (isPaused) return;
+
     const interval = setInterval(() => {
       const next = (currentIndex + 1) % slides.length;
       setNextIndex(next);
@@ -77,14 +95,14 @@ useEffect(() => {
     }, 6000);
 
     return () => clearInterval(interval);
-  }, [currentIndex]);
+  }, [currentIndex, isPaused]);
 
   const currentSlide = slides[currentIndex];
   const nextSlide = slides[nextIndex];
 
   return (
-    <HeroContainer ref={heroRef} style={{ opacity: scrollOpacity }}>
-      <VideoBackgroundContainer>
+    <HeroContainer>
+      <VideoBackgroundContainer style={{ opacity: contentOpacity }}>
         <VideoBackground key={currentIndex} autoPlay loop muted playsInline preload="auto">
           <source src={currentSlide.webm} type="video/webm" />
           <source src={currentSlide.mp4} type="video/mp4" />
@@ -96,15 +114,23 @@ useEffect(() => {
           <source src={nextSlide.mp4} type="video/mp4" />
         </VideoBackground>
       </VideoBackgroundContainer>
-      <HeroContent>
+      <HeroContent style={{ opacity: contentOpacity }}>
         <HeroTitle>Three stories, three fragrances...</HeroTitle>
         <HeroSubtitle key={currentIndex}>{currentSlide.title}</HeroSubtitle>
       </HeroContent>
       <HeroBottom>
         <BottomLeft>
-          <ProductImage key={currentIndex} src={currentSlide.image} alt={currentSlide.title} />
+          <ProductImage 
+            key={currentIndex} 
+            src={currentSlide.image} 
+            alt={currentSlide.title}
+            style={{
+              transform: `translateY(${bottleTransform.y}%) scale(${bottleTransform.scale})`,
+              opacity: bottleOpacity,
+            }}
+          />
         </BottomLeft>
-        <BottomRight>
+        <BottomRight style={{ opacity: contentOpacity }}>
           <ShopButton href={currentSlide.link} buttonBg={currentSlide.buttonBg}>
             Shop now
           </ShopButton>
