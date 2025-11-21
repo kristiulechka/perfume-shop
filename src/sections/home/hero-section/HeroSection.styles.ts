@@ -32,7 +32,7 @@ export const VideoBackgroundContainer = styled.div`
   height: auto;
   object-fit: cover;
 
-    &:after {
+  &:after {
     content: '';
     position: absolute;
     top: 0;
@@ -68,29 +68,38 @@ export const HeroContent = styled.div`
   align-items: center;
   height: 100%;
   padding: 0 clamp(20px, 5vw, 60px);
+  
+  @media (max-width: 768px) {
+    justify-content: flex-start;
+    padding-top: clamp(80px, 12vh, 120px);
+  }
 `;
 
 export const HeroTitle = styled.h1`
   color: rgba(255, 255, 255, 0.80);
   text-align: center;
   font-family: "Helvetica Neue", Arial, sans-serif;
-  font-size: clamp(24px, 3.5vw, 38px);
+  font-size: clamp(18px, 3.5vw, 38px);
   font-style: normal;
   font-weight: 200;
   line-height: 140%;
-  letter-spacing: clamp(0.4px, 0.02em, 0.76px);
-  margin-bottom: clamp(20px, 3vh, 40px);
+  letter-spacing: clamp(0.36px, 0.02em, 0.76px);
+  margin-bottom: clamp(15px, 3vh, 40px);
+  
+  @media (max-width: 768px) {
+    font-size: clamp(14px, 4vw, 24px);
+  }
 `;
 
 export const HeroSubtitle = styled.p`
   text-align: center;
   font-family: Ephesis, cursive;
-  font-size: clamp(80px, 20vw, 284px);
+  font-size: clamp(60px, 20vw, 284px);
   font-style: normal;
   font-weight: 400;
   line-height: 110%;
-  padding: 0 30px;
-  letter-spacing: clamp(-2px, -0.02em, -5.68px);
+  padding: 0 clamp(20px, 3vw, 30px);
+  letter-spacing: clamp(-1.2px, -0.02em, -5.68px);
   background: linear-gradient(247deg, rgba(255, 255, 255, 0.40) 15.2%, rgba(166, 202, 145, 0.30) 84.95%);
   background-clip: text;
   -webkit-background-clip: text;
@@ -98,24 +107,20 @@ export const HeroSubtitle = styled.p`
   animation: ${fadeIn} 0.3s ease-in-out;
   
   @media (max-width: 768px) {
-    font-size: clamp(60px, 15vw, 120px);
-  }
-  
-  @media (max-width: 480px) {
-    font-size: clamp(48px, 12vw, 80px);
+    font-size: clamp(48px, 15vw, 80px);
   }
 `;
 
 export const HeroBottom = styled.div`
   position: absolute;
-  bottom: -105px;
+  bottom: clamp(-105px, -12vh, -80px);
   left: 0;
   width: 100%;
   display: flex;
   z-index: 3;
   justify-content: center;
   align-items: center;
-  padding-bottom: 40px;
+  padding-bottom: clamp(20px, 4vh, 40px);
 `;
 
 export const BottomLeft = styled.div`
@@ -126,32 +131,48 @@ export const BottomLeft = styled.div`
 
 export const BottomRight = styled.div`
   position: absolute;
-  bottom: 180px;
-  left: 75%;
+  bottom: clamp(120px, 22vh, 180px);
+  left: 50%;
   transform: translateX(-50%);
   z-index: 3;
+  
+  @media (min-width: 769px) {
+    left: 75%;
+  }
+  
+  @media (max-width: 768px) {
+    bottom: clamp(100px, 18vh, 140px);
+  }
 `;
 
 export const ProductImage = styled.img`
-  max-height: 536px;
+  max-height: clamp(350px, 52vh, 536px);
   max-width: 100%;
   object-fit: contain;
   animation: ${fadeIn} 0.3s ease-in-out;
+  
+  @media (max-width: 768px) {
+    max-height: clamp(280px, 45vh, 400px);
+  }
 `;
 
 export const ShopButton = styled.a<{ buttonBg: string }>`
   display: inline-block;
-  padding: 16px 48px;
+  padding: clamp(12px, 2vh, 16px) clamp(36px, 6vw, 48px);
   border-radius: 40px;
   background: ${props => props.buttonBg};
   color: white;
   text-decoration: none;
   font-family: "Helvetica Neue", Arial, sans-serif;
-  font-size: 18px;
+  font-size: clamp(14px, 2.5vw, 18px);
   font-weight: 400;
   transition: opacity 0.3s ease;
   
   &:hover {
     opacity: 0.8;
+  }
+  
+  @media (max-width: 768px) {
+    font-size: clamp(12px, 3vw, 16px);
   }
 `;
