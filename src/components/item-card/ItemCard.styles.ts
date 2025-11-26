@@ -109,4 +109,9 @@ export const AddToCartButton = styled.button`
     background: #fffefe;
     color: #000;
   }
+  
+  @media (max-width: 768px) {
+    margin-left: auto;
+    margin-right: auto;
+  }
 `;

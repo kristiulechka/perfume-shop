@@ -14,6 +14,12 @@ export const SectionContainer = styled.section`
     height: 100%;
     z-index: 2;
   }
+    @media (max-width: 768px) {
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const VideoBackground = styled.video`
@@ -27,5 +33,12 @@ export const VideoBackground = styled.video`
     backdrop-filter: blur(1px);
     -webkit-backdrop-filter: blur(1px);
     mask-image: linear-gradient(to top, transparent 0%, transparent 20%, black 100%);
-    -webkit-mask-image: linear-gradient(to top, transparent 0%, transparent 20%, black 100%);
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, transparent 20%, black 100%);  
+    
+    
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
+
 `;
