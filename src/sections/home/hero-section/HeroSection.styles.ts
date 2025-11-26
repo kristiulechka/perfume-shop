@@ -73,6 +73,10 @@ export const HeroContent = styled.div`
     justify-content: flex-start;
     padding-top: clamp(80px, 12vh, 120px);
   }
+  
+  @media (max-width: 768px) and (orientation: portrait) {
+    padding-top: clamp(100px, 18vh, 100px);
+  }
 `;
 
 export const HeroTitle = styled.h1`
@@ -85,9 +89,17 @@ export const HeroTitle = styled.h1`
   line-height: 140%;
   letter-spacing: clamp(0.36px, 0.02em, 0.76px);
   margin-bottom: clamp(15px, 3vh, 40px);
+  white-space: nowrap;
+
+  
   
   @media (max-width: 768px) {
     font-size: clamp(14px, 4vw, 24px);
+  }
+  
+  @media (max-width: 768px) and (orientation: portrait) {
+    font-size: clamp(20px, 6.4vw, 28px);
+    margin-bottom: clamp(24px, 5vh, 60px);
   }
 `;
 
@@ -105,9 +117,15 @@ export const HeroSubtitle = styled.p`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: ${fadeIn} 0.3s ease-in-out;
+  white-space: nowrap;
+  
   
   @media (max-width: 768px) {
     font-size: clamp(48px, 15vw, 80px);
+  }
+  
+  @media (max-width: 768px) and (orientation: portrait) {
+    font-size: clamp(90px, 29.3vw, 140px);
   }
 `;
 
@@ -140,8 +158,14 @@ export const BottomRight = styled.div`
     left: 75%;
   }
   
-  @media (max-width: 768px) {
-    bottom: clamp(100px, 18vh, 140px);
+  @media (max-width: 768px) and (orientation: landscape) {
+    bottom: 80px;
+    left: 50%;
+  }
+  
+  @media (max-width: 768px) and (orientation: portrait) {
+    bottom: clamp(84px, 12vh, 120px);
+    left: 50%;
   }
 `;
 
@@ -151,8 +175,17 @@ export const ProductImage = styled.img`
   object-fit: contain;
   animation: ${fadeIn} 0.3s ease-in-out;
   
-  @media (max-width: 768px) {
+  @media (max-width: 768px) and (orientation: portrait) {
+    max-height: clamp(450px, 80.2vh, 650px);
+    max-width: clamp(450px, 142.9vw, 650px);
+  }
+  
+  @media (max-width: 768px) and (orientation: landscape) {
     max-height: clamp(280px, 45vh, 400px);
+  }
+  
+  @media (min-width: 769px) and (max-aspect-ratio: 4/3) {
+    max-height: clamp(450px, 58vh, 700px);
   }
 `;
 
@@ -174,5 +207,14 @@ export const ShopButton = styled.a<{ buttonBg: string }>`
   
   @media (max-width: 768px) {
     font-size: clamp(12px, 3vw, 16px);
+  }
+  
+  @media (max-width: 768px) and (orientation: portrait) {
+    display: flex;
+    width: clamp(140px, 43.7vw, 180px);
+    padding: clamp(10px, 1.65vh, 13px) clamp(28px, 8.5vw, 36px);
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(14px, 4.3vw, 18px);
   }
 `;
