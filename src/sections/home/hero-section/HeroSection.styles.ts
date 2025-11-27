@@ -67,15 +67,15 @@ export const HeroContent = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
-  padding: 0 clamp(20px, 5vw, 60px);
+  padding: 0 5vw;
   
   @media (max-width: 768px) {
     justify-content: flex-start;
-    padding-top: clamp(80px, 12vh, 120px);
+    padding-top: 12vh;
   }
   
-  @media (max-width: 768px) and (orientation: portrait) {
-    padding-top: clamp(100px, 18vh, 100px);
+  @media (max-height: 600px) {
+    padding-top: 8vh;
   }
 `;
 
@@ -83,35 +83,33 @@ export const HeroTitle = styled.h1`
   color: rgba(255, 255, 255, 0.80);
   text-align: center;
   font-family: "Helvetica Neue", Arial, sans-serif;
-  font-size: clamp(18px, 3.5vw, 38px);
+  font-size: 3.5vw;
   font-style: normal;
   font-weight: 200;
   line-height: 140%;
-  letter-spacing: clamp(0.36px, 0.02em, 0.76px);
-  margin-bottom: clamp(15px, 3vh, 40px);
+  letter-spacing: 0.02em;
+  margin-bottom: 3vh;
   white-space: nowrap;
-
-  
   
   @media (max-width: 768px) {
-    font-size: clamp(14px, 4vw, 24px);
+    font-size: 5vw;
   }
   
-  @media (max-width: 768px) and (orientation: portrait) {
-    font-size: clamp(20px, 6.4vw, 28px);
-    margin-bottom: clamp(24px, 5vh, 60px);
+  @media (max-height: 600px) {
+    font-size: 4vw;
+    margin-bottom: 2vh;
   }
 `;
 
 export const HeroSubtitle = styled.p`
   text-align: center;
   font-family: Ephesis, cursive;
-  font-size: clamp(60px, 20vw, 284px);
+  font-size: 20vw;
   font-style: normal;
   font-weight: 400;
   line-height: 110%;
-  padding: 0 clamp(20px, 3vw, 30px);
-  letter-spacing: clamp(-1.2px, -0.02em, -5.68px);
+  padding: 0 3vw;
+  letter-spacing: -0.02em;
   background: linear-gradient(247deg, rgba(255, 255, 255, 0.40) 15.2%, rgba(166, 202, 145, 0.30) 84.95%);
   background-clip: text;
   -webkit-background-clip: text;
@@ -119,26 +117,30 @@ export const HeroSubtitle = styled.p`
   animation: ${fadeIn} 0.3s ease-in-out;
   white-space: nowrap;
   
-  
   @media (max-width: 768px) {
-    font-size: clamp(48px, 15vw, 80px);
+    font-size: 25vw;
   }
   
-  @media (max-width: 768px) and (orientation: portrait) {
-    font-size: clamp(90px, 29.3vw, 140px);
+  @media (max-height: 600px) {
+    font-size: 18vw;
   }
 `;
 
 export const HeroBottom = styled.div`
   position: absolute;
-  bottom: clamp(-105px, -12vh, -80px);
+  bottom: -12vh;
   left: 0;
   width: 100%;
   display: flex;
   z-index: 3;
   justify-content: center;
   align-items: center;
-  padding-bottom: clamp(20px, 4vh, 40px);
+  padding-bottom: 4vh;
+  
+  @media (max-height: 700px) {
+    bottom: -8vh;
+    padding-bottom: 2vh;
+  }
 `;
 
 export const BottomLeft = styled.div`
@@ -149,55 +151,57 @@ export const BottomLeft = styled.div`
 
 export const BottomRight = styled.div`
   position: absolute;
-  bottom: clamp(120px, 22vh, 180px);
-  left: 50%;
+  bottom: 22vh;
+  left: 75%;
   transform: translateX(-50%);
   z-index: 3;
   
-  @media (min-width: 769px) {
-    left: 75%;
+  @media (max-width: 768px) {
+    left: 50%;
+    bottom: 15vh;
   }
   
-  @media (max-width: 768px) and (orientation: landscape) {
-    bottom: 80px;
-    left: 50%;
+  @media (max-height: 700px) {
+    bottom: 18vh;
   }
   
-  @media (max-width: 768px) and (orientation: portrait) {
-    bottom: clamp(84px, 12vh, 120px);
-    left: 50%;
+  @media (max-height: 600px) {
+    bottom: 12vh;
   }
 `;
 
 export const ProductImage = styled.img`
-  max-height: clamp(350px, 52vh, 536px);
+  max-height: 52vh;
   max-width: 100%;
   object-fit: contain;
   animation: ${fadeIn} 0.3s ease-in-out;
   
-  @media (max-width: 768px) and (orientation: portrait) {
-    max-height: clamp(450px, 80.2vh, 650px);
-    max-width: clamp(450px, 142.9vw, 650px);
+  @media (max-width: 768px) {
+    max-height: 60vh;
   }
   
-  @media (max-width: 768px) and (orientation: landscape) {
-    max-height: clamp(280px, 45vh, 400px);
+  @media (max-height: 700px) {
+    max-height: 45vh;
   }
   
-  @media (min-width: 769px) and (max-aspect-ratio: 4/3) {
-    max-height: clamp(450px, 58vh, 700px);
+  @media (max-height: 600px) {
+    max-height: 40vh;
+  }
+
+  @media (max-height: 500px) {
+    max-height: 65vh;
   }
 `;
 
 export const ShopButton = styled.a<{ buttonBg: string }>`
   display: inline-block;
-  padding: clamp(12px, 2vh, 16px) clamp(36px, 6vw, 48px);
+  padding: 2vh 6vw;
   border-radius: 40px;
   background: ${props => props.buttonBg};
   color: white;
   text-decoration: none;
   font-family: "Helvetica Neue", Arial, sans-serif;
-  font-size: clamp(14px, 2.5vw, 18px);
+  font-size: 2.5vw;
   font-weight: 400;
   transition: opacity 0.3s ease;
   
@@ -206,15 +210,16 @@ export const ShopButton = styled.a<{ buttonBg: string }>`
   }
   
   @media (max-width: 768px) {
-    font-size: clamp(12px, 3vw, 16px);
-  }
-  
-  @media (max-width: 768px) and (orientation: portrait) {
     display: flex;
-    width: clamp(140px, 43.7vw, 180px);
-    padding: clamp(10px, 1.65vh, 13px) clamp(28px, 8.5vw, 36px);
+    /* width: 40vw; */
+    padding: 1.5vh 8vw;
     justify-content: center;
     align-items: center;
-    font-size: clamp(14px, 4.3vw, 18px);
+    font-size: 4vw;
+  }
+  
+  @media (max-height: 600px) {
+    padding: 1.2vh 5vw;
+    font-size: 2vw;
   }
 `;
