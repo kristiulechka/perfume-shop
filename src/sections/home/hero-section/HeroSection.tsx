@@ -79,18 +79,78 @@ export const HeroSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [nextIndex, setNextIndex] = useState(1);
   const [isPaused, setIsPaused] = useState(false);
+  const [initialAnimationDone, setInitialAnimationDone] = useState(false);
+  const prevIndexRef = useRef(0);
   
   const contentRef = useRef<HTMLDivElement>(null);
   const bottleRef = useRef<HTMLImageElement>(null);
-  const buttonRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLAnchorElement>(null);
   const videoRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
 
+  const setupScrollTriggers = () => {
+    const vh = window.innerHeight;
+    const contentElements = [contentRef.current, videoRef.current];
+    
+    contentElements.forEach(el => {
+      if (el) {
+        ScrollTrigger.create({
+          trigger: document.body,
+          start: vh * 0.4,
+          end: vh * 0.84,
+          scrub: 0.55,
+          onUpdate: (self) => {
+            if (el) gsap.set(el, { opacity: 1 - self.progress });
+          },
+          onEnter: () => setIsPaused(true),
+          onLeaveBack: () => setIsPaused(false),
+        });
+      }
+    });
+    
+    if (buttonRef.current) {
+      ScrollTrigger.create({
+        trigger: document.body,
+        start: vh * 0.4,
+        end: vh * 0.84,
+        scrub: 0.55,
+        onUpdate: (self) => {
+          if (buttonRef.current) gsap.set(buttonRef.current, { opacity: 1 - self.progress });
+        },
+      });
+    }
+
+    if (bottleRef.current) {
+      ScrollTrigger.create({
+        trigger: document.body,
+        start: vh * 0.3,
+        end: vh * 0.8505,
+        scrub: 0.825,
+        onUpdate: (self) => {
+          if (bottleRef.current) {
+            gsap.set(bottleRef.current, { 
+              yPercent: -10 * self.progress,
+              scale: 1 + (0.05 * self.progress),
+              opacity: 1 - self.progress 
+            });
+          }
+        },
+      });
+    }
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
     
-    gsap.fromTo([titleRef.current, subtitleRef.current, buttonRef.current],
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setInitialAnimationDone(true);
+        setupScrollTriggers();
+      }
+    });
+    
+    tl.fromTo([titleRef.current, subtitleRef.current],
       { opacity: 0, y: 20 },
       { 
         opacity: 1, 
@@ -100,34 +160,35 @@ export const HeroSection = () => {
         ease: 'power2.out',
         delay: 0.3
       }
+    )
+    .fromTo(bottleRef.current,
+      { y: '3%', opacity: 0 },
+      { y: '0%', opacity: 1, duration: 1.2, ease: 'power2.out' },
+      '-=0.9'
+    )
+    .fromTo(buttonRef.current,
+      { opacity: 0 },
+      { opacity: 1, duration: 1.2, ease: 'power2.out' },
+      '-=1.2'
     );
   }, []);
 
   useEffect(() => {
-    if (bottleRef.current) {
-      gsap.fromTo(
-        bottleRef.current,
-        { y: '3%', opacity: 0 },
-        { y: '0%', opacity: 1, duration: 1.2, ease: 'power2.out' }
-      );
-    }
-  }, [currentIndex]);
-
-  useEffect(() => {
-    if (currentIndex === 0) return;
+    if (!initialAnimationDone || prevIndexRef.current === currentIndex) return;
+    
+    prevIndexRef.current = currentIndex;
     
     const tl = gsap.timeline();
     
-    tl.to([titleRef.current, subtitleRef.current, buttonRef.current], {
+    tl.to([titleRef.current, subtitleRef.current, buttonRef.current, bottleRef.current], {
       opacity: 0,
-      y: -10,
       duration: 0.3,
       ease: 'power2.in'
     })
     .set(subtitleRef.current, {
       textContent: slides[currentIndex].title
     })
-    .fromTo([titleRef.current, subtitleRef.current, buttonRef.current],
+    .fromTo([titleRef.current, subtitleRef.current],
       { opacity: 0, y: 20 },
       { 
         opacity: 1, 
@@ -136,59 +197,18 @@ export const HeroSection = () => {
         stagger: 0.15,
         ease: 'power2.out'
       }
+    )
+    .fromTo(bottleRef.current,
+      { y: '3%', opacity: 0 },
+      { y: '0%', opacity: 1, duration: 1.2, ease: 'power2.out' },
+      '-=0.6'
+    )
+    .fromTo(buttonRef.current,
+      { opacity: 0 },
+      { opacity: 1, duration: 1.2, ease: 'power2.out' },
+      '-=1.2'
     );
-  }, [currentIndex]);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const vh = window.innerHeight;
-      const contentElements = [contentRef.current, buttonRef.current, videoRef.current];
-      
-      contentElements.forEach(el => {
-        if (el) {
-          gsap.fromTo(el, 
-            { opacity: 1 },
-            {
-              opacity: 0,
-              scrollTrigger: {
-                trigger: document.body,
-                start: vh * 0.4,
-                end: vh * 0.84,
-                scrub: 0.55,
-                onEnter: () => setIsPaused(true),
-                onLeaveBack: () => {
-                  setIsPaused(false);
-                  gsap.set(el, { opacity: 1 });
-                },
-              }
-            }
-          );
-        }
-      });
-
-      if (bottleRef.current) {
-        gsap.fromTo(bottleRef.current,
-          { yPercent: 0, scale: 1, opacity: 1 },
-          {
-            yPercent: -10,
-            scale: 1.05,
-            opacity: 0,
-            scrollTrigger: {
-              trigger: document.body,
-              start: vh * 0.3,
-              end: vh * 0.8505,
-              scrub: 0.825,
-              onLeaveBack: () => {
-                gsap.set(bottleRef.current, { yPercent: 0, scale: 1, opacity: 1 });
-              }
-            }
-          }
-        );
-      }
-    });
-
-    return () => ctx.revert();
-  }, [currentIndex]);
+  }, [currentIndex, initialAnimationDone]);
 
   useEffect(() => {
     if (isPaused) return;
@@ -234,8 +254,8 @@ export const HeroSection = () => {
               alt={currentSlide.title}
             />
           </BottomLeft>
-          <BottomRight ref={buttonRef}>
-            <ShopButton href={currentSlide.link}>
+          <BottomRight>
+            <ShopButton ref={buttonRef} href={currentSlide.link}>
               <ButtonGlassFilter />
               <ButtonGlassOverlay buttonBg={currentSlide.buttonBg} />
               <ButtonGlassSpecular />
