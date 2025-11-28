@@ -90,6 +90,7 @@ export const HeroTitle = styled.h1`
   letter-spacing: 0.02em;
   margin-bottom: 3vh;
   white-space: nowrap;
+  opacity: 0;
   
   @media (max-width: 768px) {
     font-size: 5vw;
@@ -114,8 +115,8 @@ export const HeroSubtitle = styled.p`
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: ${fadeIn} 0.3s ease-in-out;
   white-space: nowrap;
+  opacity: 0;
   
   @media (max-width: 768px) {
     font-size: 25vw;
@@ -174,7 +175,7 @@ export const ProductImage = styled.img`
   max-height: 52vh;
   max-width: 100%;
   object-fit: contain;
-  animation: ${fadeIn} 0.3s ease-in-out;
+  opacity: 0;
   
   @media (max-width: 768px) {
     max-height: 60vh;
@@ -208,6 +209,7 @@ export const ShopButton = styled.a`
   font-weight: 400;
   cursor: pointer;
   white-space: nowrap;
+  opacity: 0;
   
   @media (max-width: 768px) {
     padding: 1.5vh 8vw;
