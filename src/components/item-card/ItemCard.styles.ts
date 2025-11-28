@@ -52,6 +52,16 @@ export const CardTitle = styled.h3`
   }
 `;
 
+export const PriceText = styled.div`
+  color: #fffefe;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 80%;
+  letter-spacing: -0.64px;
+  margin-bottom: 32px;
+`;
+
 export const NotesSection = styled.div``;
 
 export const NotesLabel = styled.span`
@@ -86,6 +96,49 @@ export const CursiveText = styled.p`
   -webkit-text-fill-color: transparent;
   margin-top: 16px;
   padding-bottom: 4px;
+`;
+
+export const QuantityControls = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+`;
+
+export const QuantityButton = styled.button`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #fffefe;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #fffefe;
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+`;
+
+export const QuantityIcon = styled.img`
+  width: 16px;
+  height: 16px;
+`;
+
+export const QuantityValue = styled.span`
+  color: #fff;
+  font-family: Inter, sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  min-width: 30px;
+  text-align: center;
 `;
 
 export const AddToCartButton = styled.button`
