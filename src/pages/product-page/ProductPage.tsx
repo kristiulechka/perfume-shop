@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { PageContainer } from './ProductPage.styles.ts';
-import { ItemCard } from '../../components/item-card/ItemCard.tsx';
+import { PageContainer } from './ProductPage.styles';
+import { ItemCard } from '../../components/item-card/ItemCard';
 
 export const ProductPage = () => {
   const [quantity, setQuantity] = useState(1);
@@ -37,6 +37,7 @@ export const ProductPage = () => {
         onIncrement={handleIncrement}
         onDecrement={handleDecrement}
         showQuantityControls
+        isProductPage
       />
     </PageContainer>
   );

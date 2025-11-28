@@ -27,6 +27,7 @@ interface ItemCardProps {
   quantity?: number;
   onIncrement?: () => void;
   onDecrement?: () => void;
+  isProductPage?: boolean;
 }
 
 export const ItemCard = ({
@@ -41,11 +42,12 @@ export const ItemCard = ({
   quantity = 1,
   onIncrement,
   onDecrement,
+  isProductPage = false,
 }: ItemCardProps) => {
   return (
-    <CardContainer>
-      <CardImage src={image} alt={title} />
-      <CardContent>
+    <CardContainer isProductPage={isProductPage}>
+      <CardImage src={image} alt={title} isProductPage={isProductPage} />
+      <CardContent isProductPage={isProductPage}>
         <CardTitle>{title}</CardTitle>
         
         {price && <PriceText>${price}</PriceText>}
@@ -79,7 +81,7 @@ export const ItemCard = ({
           </QuantityControls>
         )}
         
-        <AddToCartButton>Add to cart</AddToCartButton>
+        <AddToCartButton isProductPage={isProductPage}>Add to cart</AddToCartButton>
       </CardContent>
     </CardContainer>
   );

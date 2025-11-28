@@ -1,12 +1,15 @@
 import styled from '@emotion/styled';
 
-export const CardContainer = styled.div`
+export const CardContainer = styled.div<{ isProductPage?: boolean }>`
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 0;
-  max-width: 75vw;
+  ${props => props.isProductPage ?
+    `width: 100vw;`
+    : 'max-width: 100vw;'};
   margin: 0 auto;
   padding: 40px 0;
+  column-gap: ${props => props.isProductPage ? '5vw' : '0'};
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
@@ -15,8 +18,8 @@ export const CardContainer = styled.div`
   }
 `;
 
-export const CardImage = styled.img`
-  grid-column: 1 / span 4;
+export const CardImage = styled.img<{ isProductPage?: boolean }>`
+  grid-column: ${props => props.isProductPage ? '1 / span 6' : '1 / span 4'};
   width: 100%;
   height: auto;
   aspect-ratio: 1;
@@ -27,8 +30,8 @@ export const CardImage = styled.img`
   }
 `;
 
-export const CardContent = styled.div`
-  grid-column: 6 / span 7;
+export const CardContent = styled.div<{ isProductPage?: boolean }>`
+  grid-column: ${props => props.isProductPage ? '7 / span 6' : '6 / span 7'};
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -38,14 +41,14 @@ export const CardContent = styled.div`
   }
 `;
 
-export const CardTitle = styled.h3`
+export const CardTitle = styled.h3<{ isProductPage?: boolean }>`
   color: #fff;
   font-family: "Bebas Neue", sans-serif;
   font-size: 62px;
   font-weight: 400;
   line-height: 80%;
   letter-spacing: -1.24px;
-  margin-bottom: 32px;
+  margin-bottom: ${props => props.isProductPage ? '24px' : '32px'};
 
   @media (max-width: 768px) {
     font-size: 48px;
@@ -59,7 +62,7 @@ export const PriceText = styled.div`
   font-weight: 400;
   line-height: 80%;
   letter-spacing: -0.64px;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 `;
 
 export const NotesSection = styled.div``;
@@ -141,10 +144,10 @@ export const QuantityValue = styled.span`
   text-align: center;
 `;
 
-export const AddToCartButton = styled.button`
+export const AddToCartButton = styled.button<{ isProductPage?: boolean }>`
   display: flex;
-  width: 164px;
-  height: 48px;
+  width: ${props => props.isProductPage ? '213px' : '164px'};
+  height: ${props => props.isProductPage ? '62px' : '48px'};
   padding: 10px 26px 10px 25px;
   justify-content: center;
   align-items: center;
@@ -153,7 +156,7 @@ export const AddToCartButton = styled.button`
   background: transparent;
   color: #fff;
   font-family: Inter, sans-serif;
-  font-size: 16px;
+  font-size: ${props => props.isProductPage ? '21px' : '16px'};
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 16px;

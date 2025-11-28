@@ -198,13 +198,13 @@ export const ShopButton = styled.a`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 2vh 6vw;
+  padding: 2vh 4vw;
   border-radius: 40px;
   overflow: hidden;
   color: white;
   text-decoration: none;
   font-family: "Helvetica Neue", Arial, sans-serif;
-  font-size: 2.5vw;
+  font-size: 1.5vw;
   font-weight: 400;
   cursor: pointer;
   white-space: nowrap;
