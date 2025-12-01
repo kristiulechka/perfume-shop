@@ -143,10 +143,11 @@ export const HeroSection = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     
+    setupScrollTriggers();
+    
     const tl = gsap.timeline({
       onComplete: () => {
         setInitialAnimationDone(true);
-        setupScrollTriggers();
       }
     });
     
@@ -171,6 +172,10 @@ export const HeroSection = () => {
       { opacity: 1, duration: 1.2, ease: 'power2.out' },
       '-=1.2'
     );
+    
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
   }, []);
 
   useEffect(() => {
