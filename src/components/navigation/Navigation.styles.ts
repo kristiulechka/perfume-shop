@@ -44,9 +44,14 @@ export const GlassFilter = styled.div`
   inset: 0;
   z-index: 0;
   border-radius: inherit;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   filter: url(#lensFilter) saturate(110%) brightness(1.1);
+
+    @media (max-width: 768px) {
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+  }
 `;
 
 export const GlassOverlay = styled.div`
@@ -54,7 +59,7 @@ export const GlassOverlay = styled.div`
   inset: 0;
   z-index: 1;
   border-radius: inherit;
-  background: rgba(255, 255, 255, 0.01);
+  background: rgba(0, 0, 0, 0.1);
 `;
 
 export const GlassSpecular = styled.div`
@@ -146,8 +151,8 @@ export const MobileGlassFilter = styled.div`
   inset: 0;
   z-index: 0;
   border-radius: inherit;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   filter: url(#lensFilterMobile) saturate(110%) brightness(1.1);
 `;
 

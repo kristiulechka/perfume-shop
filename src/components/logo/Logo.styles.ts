@@ -16,6 +16,6 @@ export const LogoImage = styled.img`
   width: auto;
 
   @media (max-width: 768px) {
-    width: 100%;
+    height: 32px;
   }
 `;
