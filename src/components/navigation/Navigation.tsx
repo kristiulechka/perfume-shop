@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { 
   Nav,
   GlassFilter,
@@ -6,7 +7,14 @@ import {
   LogoSection, 
   ProductLinks, 
   NavLink, 
-  BagLink
+  BagLink,
+  BurgerButton,
+  BurgerIcon,
+  MobileMenu,
+  MobileMenuOverlay,
+  MobileMenuContent,
+  MobileNavLink,
+  MobileGlassFilter
 } from './Navigation.styles';
 import { Logo } from '../logo/Logo';
 
@@ -34,10 +42,23 @@ const SVGFilters = () => (
       <feDisplacementMap in="SourceGraphic" in2="displacementMap" 
         scale="15" xChannelSelector="A" yChannelSelector="A" />
     </filter>
+    <filter id="lensFilterMobile" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="0" />
+    </filter>
   </svg>
 );
 
 export const Navigation = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <>
       <SVGFilters />
@@ -54,7 +75,37 @@ export const Navigation = () => {
           <NavLink href="#noctis-violet">Noctis Violet</NavLink>
           <BagLink href="#shopping-bag">Shopping bag</BagLink>
         </ProductLinks>
+        <BurgerButton onClick={toggleMobileMenu}>
+          <BurgerIcon 
+            src={isMobileMenuOpen ? '/icons/cross.svg' : '/icons/burger.svg'} 
+            alt={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+          />
+        </BurgerButton>
       </Nav>
+
+      {isMobileMenuOpen && (
+        <MobileMenuOverlay onClick={closeMobileMenu}>
+          <MobileMenu onClick={(e) => e.stopPropagation()}>
+            <MobileGlassFilter />
+            <GlassOverlay />
+            <GlassSpecular />
+            <MobileMenuContent>
+              <MobileNavLink href="#verdantia" onClick={closeMobileMenu}>
+                Verdantia
+              </MobileNavLink>
+              <MobileNavLink href="#ignis-rosso" onClick={closeMobileMenu}>
+                Ignis Rosso
+              </MobileNavLink>
+              <MobileNavLink href="#noctis-violet" onClick={closeMobileMenu}>
+                Noctis Violet
+              </MobileNavLink>
+              <MobileNavLink href="#shopping-bag" onClick={closeMobileMenu}>
+                Shopping bag
+              </MobileNavLink>
+            </MobileMenuContent>
+          </MobileMenu>
+        </MobileMenuOverlay>
+      )}
     </>
   );
 };
