@@ -10,10 +10,12 @@ export const CardContainer = styled.div<{ isProductPage?: boolean }>`
   margin: 0 auto;
   padding: 40px 0;
   column-gap: ${props => props.isProductPage ? '5vw' : '0'};
+  position: relative;
+  z-index: 10;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 42px;
     max-width: 90vw;
   }
 `;
@@ -27,6 +29,14 @@ export const CardImage = styled.img<{ isProductPage?: boolean }>`
 
   @media (max-width: 768px) {
     grid-column: span 1;
+    height: 50vh;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+  }
+    @media (max-width: 480px) {
+    /* ${props => !props.isProductPage && ` */
+      height: auto;
+    /* `} */
   }
 `;
 
@@ -48,7 +58,7 @@ export const CardTitle = styled.h3<{ isProductPage?: boolean }>`
   font-weight: 400;
   line-height: 80%;
   letter-spacing: -1.24px;
-  margin-bottom: ${props => props.isProductPage ? '24px' : '32px'};
+  margin-bottom: ${props => props.isProductPage ? '24px' : '16px'};
 
   @media (max-width: 768px) {
     font-size: 48px;
@@ -97,7 +107,7 @@ export const CursiveText = styled.p`
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-top: 16px;
+  margin-top: 12px;
   padding-bottom: 4px;
 `;
 
@@ -106,6 +116,10 @@ export const QuantityControls = styled.div`
   align-items: center;
   gap: 16px;
   margin-top: 24px;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 `;
 
 export const QuantityButton = styled.button`
@@ -159,7 +173,7 @@ export const AddToCartButton = styled.button<{ isProductPage?: boolean }>`
   font-size: ${props => props.isProductPage ? '21px' : '16px'};
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 16px;
+  margin-top: 12px;
 
   &:hover {
     background: #fffefe;
