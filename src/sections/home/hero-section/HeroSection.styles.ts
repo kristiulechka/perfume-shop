@@ -138,7 +138,7 @@ export const HeroBottom = styled.div`
   align-items: center;
   padding-bottom: 4vh;
   
-  @media (max-height: 700px) {
+  @media (max-width: 768px) {
     bottom: -8vh;
     padding-bottom: 2vh;
   }
@@ -159,16 +159,9 @@ export const BottomRight = styled.div`
   
   @media (max-width: 768px) {
     left: 50%;
-    bottom: 15vh;
+    bottom: calc(8vh + 16px);
   }
   
-  @media (max-height: 700px) {
-    bottom: 18vh;
-  }
-  
-  @media (max-height: 600px) {
-    bottom: 12vh;
-  }
 `;
 
 export const ProductImage = styled.img`

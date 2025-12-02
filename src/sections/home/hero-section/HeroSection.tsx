@@ -18,62 +18,11 @@ import {
   ButtonContent,
   VideoBackgroundContainer,
 } from './HeroSection.styles';
+import { HERO_SLIDES, HERO_CONFIG } from './heroSection.constants';
+import { SVGFilters } from '../../../components/common/SVGFilters';
+import { GlassEffectLayers } from '../../../components/common/GlassEffectLayers';
 
 gsap.registerPlugin(ScrollTrigger);
-
-const SVGFilters = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" style={{ display: 'none' }}>
-    <defs>
-      <radialGradient id="lensGradient" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stopColor="white" stopOpacity="1" />
-        <stop offset="30%" stopColor="white" stopOpacity="0.8" />
-        <stop offset="70%" stopColor="white" stopOpacity="0.3" />
-        <stop offset="100%" stopColor="white" stopOpacity="0" />
-      </radialGradient>
-    </defs>
-    <filter id="lensFilter" x="-50%" y="-50%" width="200%" height="200%">
-      <feImage href="#lensGradient" result="grad" />
-      
-      <feGaussianBlur in="SourceAlpha" stdDeviation="15" result="blur" />
-      
-      <feColorMatrix in="blur" type="matrix" 
-        values="1 0 0 0 0
-                0 1 0 0 0
-                0 0 1 0 0
-                0 0 0 25 -12" result="displacementMap" />
-      
-      <feDisplacementMap in="SourceGraphic" in2="displacementMap" 
-        scale="15" xChannelSelector="A" yChannelSelector="A" />
-    </filter>
-  </svg>
-);
-
-const slides = [
-  {
-    webm: '/videos/verdantia.webm',
-    mp4: '/videos/verdantia.mp4',
-    title: 'Verdantia',
-    image: '/img/verdantia.png',
-    buttonBg: 'linear-gradient(95deg, rgba(111, 255, 69, 0.40) 0%, rgba(56, 151, 28, 0.40) 100%)',
-    link: '/products/verdantia',
-  },
-  {
-    webm: '/videos/ignis_rossso.webm',
-    mp4: '/videos/ignis_rossso.mp4',
-    title: 'Ignis Rosso',
-    image: '/img/ignis_rosso.png',
-    buttonBg: 'linear-gradient(95deg, rgba(255, 98, 39, 0.40) 0%, rgba(159, 54, 14, 0.40) 100%)',
-    link: '/products/ignis-rosso',
-  },
-  {
-    webm: '/videos/noctis_violet.webm',
-    mp4: '/videos/noctis_violet.mp4',
-    title: 'Noctis Violet',
-    image: '/img/noctis_violet.png',
-    buttonBg: 'linear-gradient(95deg, rgba(241, 100, 255, 0.40) 0%, rgba(124, 12, 136, 0.40) 100%)',
-    link: '/products/noctis-violet',
-  },
-];
 
 export const HeroSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -91,15 +40,16 @@ export const HeroSection = () => {
 
   const setupScrollTriggers = () => {
     const vh = window.innerHeight;
+    const { scrollTriggers: st, animations: anim } = HERO_CONFIG;
     const contentElements = [contentRef.current, videoRef.current];
     
     contentElements.forEach(el => {
       if (el) {
         ScrollTrigger.create({
           trigger: document.body,
-          start: vh * 0.4,
-          end: vh * 0.84,
-          scrub: 0.55,
+          start: vh * st.contentStart,
+          end: vh * st.contentEnd,
+          scrub: st.contentScrub,
           onUpdate: (self) => {
             if (el) gsap.set(el, { opacity: 1 - self.progress });
           },
@@ -112,9 +62,9 @@ export const HeroSection = () => {
     if (buttonRef.current) {
       ScrollTrigger.create({
         trigger: document.body,
-        start: vh * 0.4,
-        end: vh * 0.84,
-        scrub: 0.55,
+        start: vh * st.contentStart,
+        end: vh * st.contentEnd,
+        scrub: st.contentScrub,
         onUpdate: (self) => {
           if (buttonRef.current) gsap.set(buttonRef.current, { opacity: 1 - self.progress });
         },
@@ -124,9 +74,9 @@ export const HeroSection = () => {
     if (bottleRef.current) {
       ScrollTrigger.create({
         trigger: document.body,
-        start: vh * 0.3,
-        end: vh * 0.8505,
-        scrub: 0.825,
+        start: vh * st.bottleStart,
+        end: vh * st.bottleEnd,
+        scrub: st.bottleScrub,
         onUpdate: (self) => {
           if (bottleRef.current) {
             gsap.set(bottleRef.current, { 
@@ -142,13 +92,11 @@ export const HeroSection = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    
     setupScrollTriggers();
     
+    const { animations: anim } = HERO_CONFIG;
     const tl = gsap.timeline({
-      onComplete: () => {
-        setInitialAnimationDone(true);
-      }
+      onComplete: () => setInitialAnimationDone(true)
     });
     
     tl.fromTo([titleRef.current, subtitleRef.current],
@@ -156,20 +104,20 @@ export const HeroSection = () => {
       { 
         opacity: 1, 
         y: 0, 
-        duration: 0.8,
-        stagger: 0.15,
+        duration: anim.fadeInDuration,
+        stagger: anim.fadeInStagger,
         ease: 'power2.out',
-        delay: 0.3
+        delay: anim.fadeInDelay
       }
     )
     .fromTo(bottleRef.current,
       { y: '3%', opacity: 0 },
-      { y: '0%', opacity: 1, duration: 1.2, ease: 'power2.out' },
+      { y: '0%', opacity: 1, duration: anim.bottleDuration, ease: 'power2.out' },
       '-=0.9'
     )
     .fromTo(buttonRef.current,
       { opacity: 0 },
-      { opacity: 1, duration: 1.2, ease: 'power2.out' },
+      { opacity: 1, duration: anim.bottleDuration, ease: 'power2.out' },
       '-=1.2'
     );
     
@@ -182,35 +130,35 @@ export const HeroSection = () => {
     if (!initialAnimationDone || prevIndexRef.current === currentIndex) return;
     
     prevIndexRef.current = currentIndex;
-    
+    const { animations: anim } = HERO_CONFIG;
     const tl = gsap.timeline();
     
     tl.to([titleRef.current, subtitleRef.current, buttonRef.current, bottleRef.current], {
       opacity: 0,
-      duration: 0.3,
+      duration: anim.fadeOutDuration,
       ease: 'power2.in'
     })
     .set(subtitleRef.current, {
-      textContent: slides[currentIndex].title
+      textContent: HERO_SLIDES[currentIndex].title
     })
     .fromTo([titleRef.current, subtitleRef.current],
       { opacity: 0, y: 20 },
       { 
         opacity: 1, 
         y: 0, 
-        duration: 0.8,
-        stagger: 0.15,
+        duration: anim.fadeInDuration,
+        stagger: anim.fadeInStagger,
         ease: 'power2.out'
       }
     )
     .fromTo(bottleRef.current,
       { y: '3%', opacity: 0 },
-      { y: '0%', opacity: 1, duration: 1.2, ease: 'power2.out' },
+      { y: '0%', opacity: 1, duration: anim.bottleDuration, ease: 'power2.out' },
       '-=0.6'
     )
     .fromTo(buttonRef.current,
       { opacity: 0 },
-      { opacity: 1, duration: 1.2, ease: 'power2.out' },
+      { opacity: 1, duration: anim.bottleDuration, ease: 'power2.out' },
       '-=1.2'
     );
   }, [currentIndex, initialAnimationDone]);
@@ -219,16 +167,16 @@ export const HeroSection = () => {
     if (isPaused) return;
 
     const interval = setInterval(() => {
-      const next = (currentIndex + 1) % slides.length;
+      const next = (currentIndex + 1) % HERO_SLIDES.length;
       setNextIndex(next);
       setCurrentIndex(next);
-    }, 6000);
+    }, HERO_CONFIG.slideInterval);
 
     return () => clearInterval(interval);
   }, [currentIndex, isPaused]);
 
-  const currentSlide = slides[currentIndex];
-  const nextSlide = slides[nextIndex];
+  const currentSlide = HERO_SLIDES[currentIndex];
+  const nextSlide = HERO_SLIDES[nextIndex];
 
   return (
     <>
@@ -261,9 +209,12 @@ export const HeroSection = () => {
           </BottomLeft>
           <BottomRight>
             <ShopButton ref={buttonRef} href={currentSlide.link}>
-              <ButtonGlassFilter />
-              <ButtonGlassOverlay buttonBg={currentSlide.buttonBg} />
-              <ButtonGlassSpecular />
+              <GlassEffectLayers
+                GlassFilter={ButtonGlassFilter}
+                GlassOverlay={ButtonGlassOverlay}
+                GlassSpecular={ButtonGlassSpecular}
+                overlayProps={{ buttonBg: currentSlide.buttonBg }}
+              />
               <ButtonContent>Shop now</ButtonContent>
             </ShopButton>
           </BottomRight>

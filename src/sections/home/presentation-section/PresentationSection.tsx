@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { SectionContainer, VideoBackground } from './PresentationSection.styles';
+import { createVideoIntersectionObserver, handleVideoEnd } from './videoIntersection.helpers';
 
 export const PresentationSection = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -12,33 +13,15 @@ export const PresentationSection = () => {
 
     if (!video || !section) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            video.play();
-            hasPlayedRef.current = true;
-          } else if (hasPlayedRef.current) {
-            const boundingRect = section.getBoundingClientRect();
-            const isScrollingToSection = boundingRect.top > 0;
-            
-            if (isScrollingToSection) {
-              video.currentTime = 0;
-            }
-          }
-        });
-      },
-      { threshold: 0 }
-    );
-
+    const observer = createVideoIntersectionObserver(video, section, hasPlayedRef);
     observer.observe(section);
 
-    video.addEventListener('ended', () => {
-      video.pause();
-    });
+    const onEnded = () => handleVideoEnd(video);
+    video.addEventListener('ended', onEnded);
 
     return () => {
       observer.disconnect();
+      video.removeEventListener('ended', onEnded);
     };
   }, []);
 
