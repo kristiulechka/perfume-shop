@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import {
   CardContainer,
   CardImage,
@@ -28,6 +29,7 @@ interface ItemCardProps {
   onIncrement?: () => void;
   onDecrement?: () => void;
   isProductPage?: boolean;
+  productLink?: string;
 }
 
 export const ItemCard = ({
@@ -43,12 +45,13 @@ export const ItemCard = ({
   onIncrement,
   onDecrement,
   isProductPage = false,
+  productLink,
 }: ItemCardProps) => {
-  return (
+  const cardContent = (
     <CardContainer isProductPage={isProductPage}>
       <CardImage src={image} alt={title} isProductPage={isProductPage} />
       <CardContent isProductPage={isProductPage}>
-        <CardTitle>{title}</CardTitle>
+        <CardTitle isProductPage={isProductPage}>{title}</CardTitle>
         
         {price && <PriceText>${price}</PriceText>}
         
@@ -85,4 +88,10 @@ export const ItemCard = ({
       </CardContent>
     </CardContainer>
   );
+
+  if (productLink && !isProductPage) {
+    return <Link to={productLink} style={{ textDecoration: 'none' }}>{cardContent}</Link>;
+  }
+
+  return cardContent;
 };

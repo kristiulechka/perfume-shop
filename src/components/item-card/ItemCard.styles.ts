@@ -34,9 +34,7 @@ export const CardImage = styled.img<{ isProductPage?: boolean }>`
     margin-left: calc(-50vw + 50%);
   }
     @media (max-width: 480px) {
-    /* ${props => !props.isProductPage && ` */
       height: auto;
-    /* `} */
   }
 `;
 

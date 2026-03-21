@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { 
   Nav,
   GlassFilter,
@@ -36,12 +37,14 @@ export const Navigation = () => {
           GlassOverlay={GlassOverlay}
           GlassSpecular={GlassSpecular}
         />
-        <LogoSection>
+        <LogoSection to="/" style={{ textDecoration: 'none' }}>
           <Logo />
         </LogoSection>
         <ProductLinks>
           {NAV_LINKS.map(({ href, label }) => (
-            <NavLink key={href} href={href}>{label}</NavLink>
+            <Link key={href} to={href} style={{ textDecoration: 'none' }}>
+              <NavLink>{label}</NavLink>
+            </Link>
           ))}
           <BagLink href={SHOPPING_BAG_LINK.href}>
             {SHOPPING_BAG_LINK.label}
@@ -63,9 +66,11 @@ export const Navigation = () => {
             <GlassSpecular />
             <MobileMenuContent>
               {NAV_LINKS.map(({ href, label }) => (
-                <MobileNavLink key={href} href={href} onClick={closeMobileMenu}>
-                  {label}
-                </MobileNavLink>
+                <Link key={href} to={href} style={{ textDecoration: 'none' }}>
+                  <MobileNavLink onClick={closeMobileMenu}>
+                    {label}
+                  </MobileNavLink>
+                </Link>
               ))}
               <MobileNavLink href={SHOPPING_BAG_LINK.href} onClick={closeMobileMenu}>
                 {SHOPPING_BAG_LINK.label}

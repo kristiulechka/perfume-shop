@@ -8,8 +8,8 @@ export const PRODUCTS = {
     baseNotes: 'white cedarwood, musk, oakmoss',
     description: 'The clarity of dawn in a secret garden',
   },
-  ignisRosso: {
-    image: '/img/cards/ignis_rosso_card.png',
+  ignisrosso: {
+    image: '/img/cards/ignis_rossso_card.png',
     title: 'Ignis Rosso',
     price: 135,
     topNotes: 'blood orange, pink pepper, saffron',
@@ -17,7 +17,7 @@ export const PRODUCTS = {
     baseNotes: 'amber, vanilla, sandalwood',
     description: 'The intensity of passion in flames',
   },
-  noctisViolet: {
+  noctisviolet: {
     image: '/img/cards/noctis_violet_card.png',
     title: 'Noctis Violet',
     price: 145,

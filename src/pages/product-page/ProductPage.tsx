@@ -1,15 +1,19 @@
+import { useParams } from 'react-router-dom';
 import { PageContainer } from './ProductPage.styles';
 import { ItemCard } from '../../components/item-card/ItemCard';
 import { useQuantity } from './useQuantity';
 import { PRODUCTS, type ProductKey } from './productPage.constants';
 
-interface ProductPageProps {
-  productKey?: ProductKey;
-}
-
-export const ProductPage = ({ productKey = 'verdantia' }: ProductPageProps) => {
+export const ProductPage = () => {
+  const { productId } = useParams<{ productId: string }>();
   const { quantity, increment, decrement } = useQuantity(1);
+  
+  const productKey = (productId?.replace('-', '') || 'verdantia') as ProductKey;
   const productData = PRODUCTS[productKey];
+
+  if (!productData) {
+    return <PageContainer>Product not found</PageContainer>;
+  }
 
   return (
     <PageContainer>

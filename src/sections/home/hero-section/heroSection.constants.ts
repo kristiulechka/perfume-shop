@@ -36,10 +36,10 @@ export const HERO_CONFIG = {
     bottleScrub: 0.825,
   },
   animations: {
-    fadeInDelay: 0.3,
-    fadeInDuration: 0.8,
-    fadeInStagger: 0.15,
-    bottleDuration: 1.2,
-    fadeOutDuration: 0.3,
+    fadeInDelay: 0.21,
+    fadeInDuration: 0.56,
+    fadeInStagger: 0.11,
+    bottleDuration: 0.85,
+    fadeOutDuration: 0.21,
   },
 } as const;

@@ -21,6 +21,12 @@ export const HeroContainer = styled.section`
   z-index: 1;
 `;
 
+export const HeroContainerWrapper = styled.section`
+  position: relative;
+  width: 100%;
+  height: 100%;
+`;
+
 export const VideoBackgroundContainer = styled.div`
   filter: blur(10px);
   position: absolute;
@@ -71,7 +77,7 @@ export const HeroContent = styled.div`
   
   @media (max-width: 768px) {
     justify-content: flex-start;
-    padding-top: 12vh;
+    padding-top: 29vh;
   }
   
   @media (max-height: 600px) {
@@ -119,12 +125,12 @@ export const HeroSubtitle = styled.p`
   opacity: 0;
   
   @media (max-width: 768px) {
-    font-size: 25vw;
+    font-size: 21vw;
   }
-  
   @media (max-height: 600px) {
     font-size: 18vw;
   }
+  
 `;
 
 export const HeroBottom = styled.div`

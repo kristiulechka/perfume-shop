@@ -1,7 +1,7 @@
 export const NAV_LINKS = [
-  { href: '#verdantia', label: 'Verdantia' },
-  { href: '#ignis-rosso', label: 'Ignis Rosso' },
-  { href: '#noctis-violet', label: 'Noctis Violet' },
+  { href: '/products/verdantia', label: 'Verdantia' },
+  { href: '/products/ignis-rosso', label: 'Ignis Rosso' },
+  { href: '/products/noctis-violet', label: 'Noctis Violet' },
 ] as const;
 
 export const SHOPPING_BAG_LINK = { 

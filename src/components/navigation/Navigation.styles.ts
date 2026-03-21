@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
+import { Link } from 'react-router-dom';
 
 const fadeIn = keyframes`
   from {
@@ -70,7 +71,7 @@ export const GlassSpecular = styled.div`
   box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.08);
 `;
 
-export const LogoSection = styled.div`
+export const LogoSection = styled(Link)`
   background-color: #1B3B48;
   padding: 0 32px;
   display: flex;
@@ -78,6 +79,7 @@ export const LogoSection = styled.div`
   height: 100%;
   position: relative;
   z-index: 3;
+  cursor: pointer;
 
   @media (max-width: 768px) {
     padding: 16px 24px;
@@ -89,7 +91,7 @@ export const ProductLinks = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  padding: 20px 32px;
+  padding: 0 32px;
   position: relative;
   z-index: 3;
 
@@ -111,6 +113,9 @@ export const NavLink = styled.a`
   transition: opacity 0.3s ease;
   white-space: nowrap;
   text-decoration: none;
+  height: 62px;
+  display: flex;
+  align-items: center;
 
   &:hover {
     opacity: 0.7;

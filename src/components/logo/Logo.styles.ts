@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const LogoContainer = styled.a`
+export const LogoContainer = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -14,8 +14,9 @@ export const LogoContainer = styled.a`
 export const LogoImage = styled.img`
   height: 24px;
   width: auto;
+  margin-bottom: 6px;
 
   @media (max-width: 768px) {
-    max-height: 32px;
+    /* max-height: 32px; */
   }
 `;

@@ -7,7 +7,7 @@ export const AllItemsSection = () => {
     <>
       {ITEMS.map((item) => (
         <SectionContainer key={item.title}>
-          <ItemCard {...item} />
+          <ItemCard {...item} productLink={item.link} />
         </SectionContainer>
       ))}
     </>
