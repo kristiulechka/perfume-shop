@@ -28,6 +28,7 @@ interface ItemCardProps {
   quantity?: number;
   onIncrement?: () => void;
   onDecrement?: () => void;
+  onAddToCart?: () => void;
   isProductPage?: boolean;
   productLink?: string;
 }
@@ -44,34 +45,41 @@ export const ItemCard = ({
   quantity = 1,
   onIncrement,
   onDecrement,
+  onAddToCart,
   isProductPage = false,
   productLink,
 }: ItemCardProps) => {
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onAddToCart?.();
+  };
+
   const cardContent = (
     <CardContainer isProductPage={isProductPage}>
       <CardImage src={image} alt={title} isProductPage={isProductPage} />
       <CardContent isProductPage={isProductPage}>
         <CardTitle isProductPage={isProductPage}>{title}</CardTitle>
-        
+
         {price && <PriceText>${price}</PriceText>}
-        
+
         <NotesSection>
           <NotesLabel>TOP NOTES:</NotesLabel>
           <NotesText>{topNotes}</NotesText>
         </NotesSection>
-        
+
         <NotesSection>
           <NotesLabel>HEART NOTES:</NotesLabel>
           <NotesText>{heartNotes}</NotesText>
         </NotesSection>
-        
+
         <NotesSection>
           <NotesLabel>BASE NOTES:</NotesLabel>
           <NotesText>{baseNotes}</NotesText>
         </NotesSection>
-        
+
         <CursiveText>{description}</CursiveText>
-        
+
         {showQuantityControls && (
           <QuantityControls>
             <QuantityButton onClick={onDecrement} disabled={quantity <= 1}>
@@ -83,8 +91,10 @@ export const ItemCard = ({
             </QuantityButton>
           </QuantityControls>
         )}
-        
-        <AddToCartButton isProductPage={isProductPage}>Add to cart</AddToCartButton>
+
+        <AddToCartButton isProductPage={isProductPage} onClick={handleAddToCart}>
+          Add to cart
+        </AddToCartButton>
       </CardContent>
     </CardContainer>
   );

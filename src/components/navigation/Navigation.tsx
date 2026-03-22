@@ -1,14 +1,18 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { 
+import { useDispatch, useSelector } from 'react-redux';
+import type { RootState } from '../../store';
+import { openCart } from '../../store/cartSlice';
+import {
   Nav,
   GlassFilter,
   GlassOverlay,
   GlassSpecular,
-  LogoSection, 
-  ProductLinks, 
-  NavLink, 
-  BagLink,
+  LogoSection,
+  ProductLinks,
+  NavLink,
+  BagButton,
+  BagCount,
   BurgerButton,
   BurgerIcon,
   MobileMenu,
@@ -20,19 +24,28 @@ import {
 import { Logo } from '../logo/Logo';
 import { SVGFilters } from '../common/SVGFilters';
 import { GlassEffectLayers } from '../common/GlassEffectLayers';
-import { NAV_LINKS, SHOPPING_BAG_LINK, ICONS } from './navigation.constants';
+import { NAV_LINKS, ICONS } from './navigation.constants';
 
 export const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const dispatch = useDispatch();
+  const cartCount = useSelector((state: RootState) =>
+    state.cart.items.reduce((sum, item) => sum + item.quantity, 0)
+  );
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
+
+  const handleOpenCart = () => {
+    closeMobileMenu();
+    dispatch(openCart());
+  };
 
   return (
     <>
       <SVGFilters />
       <Nav>
-        <GlassEffectLayers 
+        <GlassEffectLayers
           GlassFilter={GlassFilter}
           GlassOverlay={GlassOverlay}
           GlassSpecular={GlassSpecular}
@@ -46,13 +59,14 @@ export const Navigation = () => {
               <NavLink>{label}</NavLink>
             </Link>
           ))}
-          <BagLink href={SHOPPING_BAG_LINK.href}>
-            {SHOPPING_BAG_LINK.label}
-          </BagLink>
+          <BagButton onClick={handleOpenCart}>
+            Shopping bag
+            {cartCount > 0 && <BagCount>{cartCount}</BagCount>}
+          </BagButton>
         </ProductLinks>
         <BurgerButton onClick={toggleMobileMenu}>
-          <BurgerIcon 
-            src={isMobileMenuOpen ? ICONS.close : ICONS.burger} 
+          <BurgerIcon
+            src={isMobileMenuOpen ? ICONS.close : ICONS.burger}
             alt={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
           />
         </BurgerButton>
@@ -72,8 +86,8 @@ export const Navigation = () => {
                   </MobileNavLink>
                 </Link>
               ))}
-              <MobileNavLink href={SHOPPING_BAG_LINK.href} onClick={closeMobileMenu}>
-                {SHOPPING_BAG_LINK.label}
+              <MobileNavLink onClick={handleOpenCart}>
+                Shopping bag{cartCount > 0 ? ` (${cartCount})` : ''}
               </MobileNavLink>
             </MobileMenuContent>
           </MobileMenu>

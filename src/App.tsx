@@ -4,6 +4,7 @@ import { Navigation } from './components/navigation/Navigation';
 import { Footer } from './components/footer/Footer';
 import { ProductPage } from './pages/product-page/ProductPage';
 import { Home } from './pages/home-page/Home';
+import { ShoppingBag } from './components/shopping-bag/ShoppingBag';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/products/:productId" element={<ProductPage />} />
       </Routes>
       <Footer />
+      <ShoppingBag />
     </BrowserRouter>
   );
 }

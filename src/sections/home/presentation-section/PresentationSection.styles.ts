@@ -4,6 +4,7 @@ export const SectionContainer = styled.section`
   position: relative;
   width: 100%;
   background-color: #000;
+  padding: 150px 0;
   
   &:after {
     content: '';
@@ -15,10 +16,11 @@ export const SectionContainer = styled.section`
     z-index: 2;
   }
     @media (max-width: 768px) {
-    height: 60vh;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0;
   }
 `;
 

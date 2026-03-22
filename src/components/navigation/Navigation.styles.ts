@@ -126,7 +126,46 @@ export const NavLink = styled.a`
   }
 `;
 
-export const BagLink = styled(NavLink)``;
+export const BagButton = styled.button`
+  color: #FFF;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 110%;
+  letter-spacing: 1.98px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+  background: transparent;
+  border: none;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &:hover { opacity: 0.7; }
+
+  @media (max-width: 1024px) {
+    font-size: 14px;
+  }
+`;
+
+export const BagCount = styled.span`
+  background: #fff;
+  color: #000;
+  font-family: Inter, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+`;
 
 export const BurgerButton = styled.button`
   display: none;
