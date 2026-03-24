@@ -11,15 +11,6 @@ const fadeIn = keyframes`
   }
 `;
 
-const fadeOut = keyframes`
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-`;
-
 export const Nav = styled.nav`
   position: fixed;
   top: 20px;
