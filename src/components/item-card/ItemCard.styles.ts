@@ -125,17 +125,19 @@ export const QuantityButton = styled.button`
   height: 40px;
   border-radius: 50%;
   border: 1px solid #fffefe;
-  background: transparent;
+  background: rgba(255, 254, 254, 0);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, border-color 0.3s ease;
 
   &:hover {
     background: #fffefe;
-  }
+    border-color: #fffefe;
 
+    img { filter: invert(1); }
+  }
   &:disabled {
     opacity: 0.3;
     cursor: not-allowed;
@@ -165,17 +167,24 @@ export const AddToCartButton = styled.button<{ isProductPage?: boolean }>`
   align-items: center;
   border-radius: 60px;
   border: 1px solid #fffefe;
-  background: transparent;
+  background: rgba(255, 254, 254, 0);
   color: #fff;
-  font-family: Inter, sans-serif;
-  font-size: ${props => props.isProductPage ? '21px' : '16px'};
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-size: ${props => props.isProductPage ? '30px' : '24px'};
+  line-height: 1;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease;
   margin-top: 12px;
 
   &:hover {
     background: #fffefe;
     color: #000;
+  }
+
+  span{
+    line-height: 1;
+    margin-top: 3px;
   }
   
   @media (max-width: 768px) {

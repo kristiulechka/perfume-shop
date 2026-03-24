@@ -93,7 +93,9 @@ export const ItemCard = ({
         )}
 
         <AddToCartButton isProductPage={isProductPage} onClick={handleAddToCart}>
-          Add to cart
+          <span>
+            Add to cart
+          </span>
         </AddToCartButton>
       </CardContent>
     </CardContainer>

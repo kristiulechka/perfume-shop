@@ -15,4 +15,6 @@ export const FooterContent = styled.div`
 export const Copyright = styled.p`
   font-size: 14px;
   color: #888;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
 `;

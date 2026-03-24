@@ -61,7 +61,9 @@ export const Navigation = () => {
           ))}
           <BagButton onClick={handleOpenCart}>
             Shopping bag
-            {cartCount > 0 && <BagCount>{cartCount}</BagCount>}
+            {cartCount > 0 && <BagCount>
+              <span>{cartCount}</span>
+              </BagCount>}
           </BagButton>
         </ProductLinks>
         <BurgerButton onClick={toggleMobileMenu}>

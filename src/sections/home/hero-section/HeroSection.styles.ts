@@ -193,7 +193,7 @@ export const ProductImage = styled.img`
   }
 `;
 
-export const ShopButton = styled.a`
+export const ShopButton = styled.span`
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -209,12 +209,17 @@ export const ShopButton = styled.a`
   cursor: pointer;
   white-space: nowrap;
   opacity: 0;
-  
+  --gradient-pos: 0% 50%;
+
+  &:hover {
+    --gradient-pos: 100% 50%;
+  }
+
   @media (max-width: 768px) {
     padding: 1.5vh 8vw;
     font-size: 4vw;
   }
-  
+
   @media (max-height: 600px) {
     padding: 1.2vh 5vw;
     font-size: 2vw;
@@ -237,6 +242,9 @@ export const ButtonGlassOverlay = styled.div<{ buttonBg: string }>`
   z-index: 1;
   border-radius: inherit;
   background: ${props => props.buttonBg};
+  background-size: 150% 100%;
+  background-position: var(--gradient-pos, 0% 50%);
+  transition: background-position 0.4s ease;
 `;
 
 export const ButtonGlassSpecular = styled.div`
@@ -250,4 +258,10 @@ export const ButtonGlassSpecular = styled.div`
 export const ButtonContent = styled.span`
   position: relative;
   z-index: 3;
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 110%;
+  letter-spacing: 1.98px;
 `;

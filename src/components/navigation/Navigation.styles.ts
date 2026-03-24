@@ -100,7 +100,7 @@ export const ProductLinks = styled.div`
   }
 `;
 
-export const NavLink = styled.a`
+export const NavLink = styled.span`
   color: #FFF;
   text-align: center;
   font-family: 'Inter', sans-serif;
@@ -144,6 +144,7 @@ export const BagButton = styled.button`
   display: flex;
   align-items: center;
   gap: 8px;
+  position: relative;
 
   &:hover { opacity: 0.7; }
 
@@ -156,15 +157,26 @@ export const BagCount = styled.span`
   background: #fff;
   color: #000;
   font-family: Inter, sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   line-height: 1;
+  position: absolute;
+  right: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  span  {
+      font-size: 11px;
+      font-weight: 500;
+      font-family: Inter, sans-serif;
+      letter-spacing: 1px;
+  }
 `;
 
 export const BurgerButton = styled.button`
@@ -241,7 +253,7 @@ export const MobileMenuContent = styled.div`
   align-items: center;
 `;
 
-export const MobileNavLink = styled.a`
+export const MobileNavLink = styled.span`
   color: #FFF;
   text-align: center;
   font-family: 'Inter', sans-serif;

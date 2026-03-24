@@ -139,7 +139,7 @@ export const QtyButton = styled.button`
   height: 26px;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.25);
-  background: transparent;
+  background: rgba(255, 255, 255, 0);
   color: #fff;
   display: flex;
   align-items: center;
@@ -147,9 +147,13 @@ export const QtyButton = styled.button`
   cursor: pointer;
   font-size: 14px;
   line-height: 1;
-  transition: all 0.2s;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 
-  &:hover { background: #fff; color: #000; }
+  &:hover {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+  }
   &:disabled { opacity: 0.25; cursor: not-allowed; }
 `;
 
@@ -173,7 +177,7 @@ export const RemoveButton = styled.button`
   letter-spacing: 0.05em;
   text-transform: uppercase;
   padding: 2px 0;
-  transition: color 0.2s;
+  transition: color 0.3s;
 
   &:hover { color: #fff; }
 `;
@@ -214,16 +218,20 @@ export const ActionButton = styled.button`
   height: 54px;
   border-radius: 60px;
   border: 1px solid rgba(255, 255, 255, 0.7);
-  background: transparent;
+  background: rgba(255, 255, 255, 0);
   color: #fff;
-  font-family: Inter, sans-serif;
-  font-size: 15px;
-  font-weight: 300;
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-size: 24px;
   letter-spacing: 0.05em;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 
-  &:hover { background: #fff; color: #000; border-color: #fff; }
+  &:hover {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+  }
   &:disabled { opacity: 0.3; cursor: not-allowed; }
 `;
 
@@ -239,7 +247,7 @@ export const BackButton = styled.button`
   display: flex;
   align-items: center;
   gap: 6px;
-  transition: color 0.2s;
+  transition: color 0.3s;
   margin-bottom: 4px;
 
   &:hover { color: #fff; }
