@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { asset } from '../../../utils/asset';
 import { SectionContainer, VideoBackground } from './PresentationSection.styles';
 import { createVideoIntersectionObserver, handleVideoEnd } from './videoIntersection.helpers';
 
@@ -33,8 +34,8 @@ export const PresentationSection = () => {
         playsInline
         preload="auto"
       >
-        <source src="/videos/all_bottles.webm" type="video/webm" />
-        <source src="/videos/all_bottles.mp4" type="video/mp4" />
+        <source src={asset('/videos/all_bottles.webm')} type="video/webm" />
+        <source src={asset('/videos/all_bottles.mp4')} type="video/mp4" />
       </VideoBackground>
     </SectionContainer>
   );

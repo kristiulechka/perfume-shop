@@ -4,7 +4,7 @@ import storage from 'redux-persist/lib/storage';
 import cartReducer from './cartSlice';
 
 const persistConfig = {
-  key: 'cart',
+  key: 'cart-v2',
   storage,
   whitelist: ['items'],
 };
