@@ -1,6 +1,8 @@
+import { asset } from '../../utils/asset';
+
 export const PRODUCTS = {
   verdantia: {
-    image: '/img/cards/verdantia_card.png',
+    image: asset('/img/cards/verdantia_card.png'),
     title: 'Verdantia',
     price: 120,
     topNotes: 'green tea, bergamot, cucumber',
@@ -9,7 +11,7 @@ export const PRODUCTS = {
     description: 'The clarity of dawn in a secret garden',
   },
   ignisrosso: {
-    image: '/img/cards/ignis_rossso_card.png',
+    image: asset('/img/cards/ignis_rossso_card.png'),
     title: 'Ignis Rosso',
     price: 135,
     topNotes: 'blood orange, pink pepper, saffron',
@@ -18,7 +20,7 @@ export const PRODUCTS = {
     description: 'The intensity of passion in flames',
   },
   noctisviolet: {
-    image: '/img/cards/noctis_violet_card.png',
+    image: asset('/img/cards/noctis_violet_card.png'),
     title: 'Noctis Violet',
     price: 145,
     topNotes: 'blackcurrant, lavender, violet leaf',

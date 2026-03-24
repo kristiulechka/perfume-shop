@@ -1,3 +1,5 @@
+import { asset } from '../../../utils/asset';
+
 interface Item {
   id: string;
   image: string;
@@ -13,7 +15,7 @@ interface Item {
 export const ITEMS: readonly Item[] = [
   {
     id: 'verdantia',
-    image: '/img/cards/verdantia_card.png',
+    image: asset('/img/cards/verdantia_card.png'),
     title: 'Verdantia',
     price: 120,
     topNotes: 'green tea, bergamot, cucumber',
@@ -24,7 +26,7 @@ export const ITEMS: readonly Item[] = [
   },
   {
     id: 'ignis-rosso',
-    image: '/img/cards/ignis_rossso_card.png',
+    image: asset('/img/cards/ignis_rossso_card.png'),
     title: 'Ignis Rosso',
     price: 135,
     topNotes: 'pink pepper, bitter orange',
@@ -35,7 +37,7 @@ export const ITEMS: readonly Item[] = [
   },
   {
     id: 'noctis-violet',
-    image: '/img/cards/noctis_violet_card.png',
+    image: asset('/img/cards/noctis_violet_card.png'),
     title: 'Noctis Violet',
     price: 145,
     topNotes: 'blackcurrant, bergamot',

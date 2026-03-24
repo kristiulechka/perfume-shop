@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { GlobalStyles } from './styles/GlobalStyles';
 import { Navigation } from './components/navigation/Navigation';
 import { Footer } from './components/footer/Footer';
@@ -8,7 +8,7 @@ import { ShoppingBag } from './components/shopping-bag/ShoppingBag';
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <GlobalStyles />
       <Navigation />
       <Routes>
@@ -17,7 +17,7 @@ function App() {
       </Routes>
       <Footer />
       <ShoppingBag />
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

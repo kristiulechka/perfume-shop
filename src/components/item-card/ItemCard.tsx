@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { asset } from '../../utils/asset';
 import {
   CardContainer,
   CardImage,
@@ -83,11 +84,11 @@ export const ItemCard = ({
         {showQuantityControls && (
           <QuantityControls>
             <QuantityButton onClick={onDecrement} disabled={quantity <= 1}>
-              <QuantityIcon src="/icons/minus.svg" alt="Decrease quantity" />
+              <QuantityIcon src={asset('/icons/minus.svg')} alt="Decrease quantity" />
             </QuantityButton>
             <QuantityValue>{quantity}</QuantityValue>
             <QuantityButton onClick={onIncrement}>
-              <QuantityIcon src="/icons/plus.svg" alt="Increase quantity" />
+              <QuantityIcon src={asset('/icons/plus.svg')} alt="Increase quantity" />
             </QuantityButton>
           </QuantityControls>
         )}

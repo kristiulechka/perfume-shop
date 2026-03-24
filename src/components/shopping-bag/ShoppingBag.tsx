@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '../../store';
 import { closeCart, removeItem, updateQuantity, clearCart } from '../../store/cartSlice';
+import { asset } from '../../utils/asset';
 import { OrderForm, type OrderFormData } from './OrderForm';
 import {
   Overlay,
@@ -68,7 +69,7 @@ export const ShoppingBag = () => {
             {view === 'success' && 'Thank you'}
           </DrawerTitle>
           <CloseButton onClick={handleClose}>
-            <img src="/icons/cross.svg" alt="Close" />
+            <img src={asset('/icons/cross.svg')} alt="Close" />
           </CloseButton>
         </DrawerHeader>
 
